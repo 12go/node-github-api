@@ -1,22 +1,28 @@
-var Gh = require('github-api'),
-    Promise = require('bluebird');
+var Promise = require('bluebird');
+    Gh = require('github-api'),
+    gh = new Gh({ token: 'fb16ec306976da7b26936c6c4ba5f8b7d4a9521b' }),
+    user = gh.getUser();
 
-var gh = new Gh({ token: 'fb16ec306976da7b26936c6c4ba5f8b7d4a9521b' });
-
-var user = gh.getUser();
-
-Promise.try(user.repos)
-  .then(console.log)
-  .catch(console.log);
+var UserAPI = Promise.promisifyAll(user);
 
 
-// user.repos(myCb);
+createRepo("coolnewrepo")
+  .then(handleSuccess)
+  .catch(handleFailure);
 
-function myCb(e, data) {
-  if (!e) {
-    console.log('success!', data);
-  }
-  else {
-    console.log('failed!', e);
-  }
+
+function createRepo(repoName) {
+  var repoDetails = {
+        "name": repoName
+      };
+
+  return UserAPI.createRepoAsync(repoDetails);
+}
+
+function handleSuccess(data) {
+  console.log("success!", data);
+}
+
+function handleFailure(err) {
+  console.log('failure!', err);
 }
