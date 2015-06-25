@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bluebird": "^2.9.30",
-    "github-api": "^0.10.6"
+    "bluebird": "^2.9.30"
   }
 }
