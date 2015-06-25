@@ -1,0 +1,2 @@
+# botshop
+Playing with bots
