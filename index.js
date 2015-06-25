@@ -1,12 +1,29 @@
 var Promise = require('bluebird');
-    Gh = require('github-api'),
-    gh = new Gh({ token: 'fb16ec306976da7b26936c6c4ba5f8b7d4a9521b' }),
-    user = gh.getUser();
+    Gh = require('node-github'),
+    gh = new Gh({ 
+      version: "3.0.0",
+      debug: true
+    });
 
-var UserAPI = Promise.promisifyAll(user);
+gh.authenticate({
+  token: 'fb16ec306976da7b26936c6c4ba5f8b7d4a9521b',
+  type: "oauth"
+});
+
+gh.repos.create({ name: "archana" }, function(err, data) {
+  if (err) {
+    console.log('error', err);
+  }
+  else {
+    console.log('data', data);
+  }
+});
 
 
-createRepo("archana");
+
+// var UserAPI = Promise.promisifyAll(user);
+
+// createRepo("archana");
 
 
 function createRepo(repoName) {
