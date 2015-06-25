@@ -6,9 +6,7 @@ var Promise = require('bluebird');
 var UserAPI = Promise.promisifyAll(user);
 
 
-createRepo("coolnewrepo")
-  .then(handleSuccess)
-  .catch(handleFailure);
+createRepo("coolnewrepo");
 
 
 function createRepo(repoName) {
@@ -16,7 +14,9 @@ function createRepo(repoName) {
         "name": repoName
       };
 
-  return UserAPI.createRepoAsync(repoDetails);
+  UserAPI.createRepoAsync(repoDetails)
+    .then(handleSuccess)
+    .catch(handleFailure);
 }
 
 function handleSuccess(data) {
