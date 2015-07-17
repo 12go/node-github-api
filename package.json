@@ -6,7 +6,7 @@
   "repository": "https://github.com/wheelhousehq/node-github-api",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel/register"
+    "test": "./bin/mocha.sh"
   },
   "author": "",
   "license": "ISC",
