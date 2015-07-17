@@ -1,0 +1,31 @@
+{
+  "name": "node-github-api",
+  "version": "0.0.1",
+  "description": "API for github in node.js",
+  "engine": "node 0.12.7",
+  "repository": "https://github.com/wheelhousehq/node-github-api",
+  "main": "index.js",
+  "scripts": {
+    "test": "./bin/test.sh"
+  },
+  "author": "",
+  "license": "ISC",
+  "maintainers": [
+    {
+      "name": "archanid",
+      "email": "archana@wheelhousehq.com"
+    }
+  ],
+  "dependencies": {
+    "babel": "^5.6.23",
+    "bluebird": "^2.9.30",
+    "node-github": "0.0.3",
+    "superagent": "^1.2.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^3.1.23",
+    "chai": "^3.1.0",
+    "eslint": "^0.24.1",
+    "mocha": "^2.2.5"
+  }
+}
