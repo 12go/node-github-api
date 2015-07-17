@@ -4,7 +4,7 @@ import request from 'superagent';
 import url from 'url';
 import chai from 'chai';
 
-var expect = chai.expect;
+const expect = chai.expect;
 
 describe('sanity check', () => {
   it('is sane', () => {
