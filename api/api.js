@@ -2,8 +2,13 @@
 
 import Promise from 'bluebird';
 
-class API {
-}
-
 export default API;
+
+function API() {
+
+
+  return {
+  };
+
+}
 
