@@ -1,8 +1,8 @@
 'use strict';
 
-import request from 'superagent';
-import url from 'url';
 import chai from 'chai';
+import api from '../api/api.js';
+//import helpers from './helpers';
 
 const expect = chai.expect;
 
@@ -12,28 +12,30 @@ describe('sanity check', () => {
   });
 });
 
-describe('GH API test', () => {
-  it('authenticates', (done) => {
-    const protocol = "https",
-          host = "api.github.com",
-          headers = {
-            "Accept": "application/vnd.github.v3+json"
-          },
-          reqUrl = url.format({ protocol, host });
+describe('Get Endpoint Categories', () => {
+  let request;
 
+  beforeEach(() => {
+    request = api({ token: "f839f7841f7276c6b688e67c4ba562cdd72bbe7b" })
+      .getEndpointCategories();
+  });
+
+  it('succeeds', (done) => {
     request
-      .get(reqUrl)
-      .auth('f839f7841f7276c6b688e67c4ba562cdd72bbe7b')
-      .set(headers)
-      .end((e, data) => {
-        if (e) {
-          done(e);
-        }
-        else {
-          expect(data).to.have.property('status', 200);
-          done();
-        }
-      });
+      .then((res) => {
+        expect(res).to.have.property('status', 200);
+        done();
+      })
+      .catch(done);
+  });
+
+  it('has data', (done) => {
+    request
+      .then((res) => {
+        expect(res.body).to.have.property('current_user_url', 'https://api.github.com/user');
+        done();
+      })
+      .catch(done);
   });
 });
 
