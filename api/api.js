@@ -3,7 +3,6 @@
 import Promise from 'bluebird';
 import url from 'url';
 import request from 'superagent';
-import repos from './repos';
 
 class API {
 
@@ -13,7 +12,9 @@ class API {
           host = "api.github.com";
     
     if (!token) {
-      return console.error(new Error("NodeGithubApi :: need token!"));
+      const e = new Error("NodeGithubApi :: need token!");
+      console.error(e);
+      throw e;
     }
 
     this.token = token;
@@ -22,10 +23,13 @@ class API {
       "Accept": "application/vnd.github.v3+json",
       "User-Agent": "node-github-api"
     };
-
-    this.Repos = new repos();
   }
 
+  /* getEndpointCategories
+   *
+   * Just to test auth for now
+   * will be removed
+   */
   getEndpointCategories () {
     return new Promise((res, rej) => {
       request

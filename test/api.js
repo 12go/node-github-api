@@ -1,8 +1,8 @@
 'use strict';
 
 import chai from 'chai';
-import api from '../api/api.js';
 //import helpers from './helpers';
+import Github from '../api/github';
 
 const expect = chai.expect;
 
@@ -15,11 +15,21 @@ describe('sanity check', () => {
   });
 });
 
+describe('Instantiation without token', () => {
+  it('fails', () => {
+    function test() {
+      return new Github();
+    }
+
+    expect(test).to.throw();
+  });
+});
+
 describe('Endpoint Test with good token', () => {
   let request;
 
   beforeEach(() => {
-    request = new api({ token: GOOD_TOKEN })
+    request = new Github({ token: GOOD_TOKEN })
       .getEndpointCategories();
   });
 
@@ -46,7 +56,7 @@ describe('Endpoint test With bad token', () => {
   let request;
 
   beforeEach(() => {
-    request = new api({ token: BAD_TOKEN })
+    request = new Github({ token: BAD_TOKEN })
       .getEndpointCategories();
   });
 
