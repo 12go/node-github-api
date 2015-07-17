@@ -6,17 +6,20 @@ import api from '../api/api.js';
 
 const expect = chai.expect;
 
+const BAD_TOKEN = "badtoken",
+      GOOD_TOKEN = "f839f7841f7276c6b688e67c4ba562cdd72bbe7b";
+
 describe('sanity check', () => {
   it('is sane', () => {
     expect(true).to.equal(true);
   });
 });
 
-describe('Get Endpoint Categories', () => {
+describe('Endpoint Test with good token', () => {
   let request;
 
   beforeEach(() => {
-    request = new api({ token: "f839f7841f7276c6b688e67c4ba562cdd72bbe7b" })
+    request = new api({ token: GOOD_TOKEN })
       .getEndpointCategories();
   });
 
@@ -28,7 +31,7 @@ describe('Get Endpoint Categories', () => {
       })
       .catch(done);
   });
-
+  
   it('has data', (done) => {
     request
       .then((res) => {
@@ -36,6 +39,24 @@ describe('Get Endpoint Categories', () => {
         done();
       })
       .catch(done);
+  });
+});
+
+describe('Endpoint test With bad token', () => {
+  let request;
+
+  beforeEach(() => {
+    request = new api({ token: BAD_TOKEN })
+      .getEndpointCategories();
+  });
+
+  it('fails with invalid token', (done) => {
+    request
+      .then(done)
+      .catch((e) => {
+        expect(e).to.have.property('status', 401);
+        done();
+      });
   });
 });
 
