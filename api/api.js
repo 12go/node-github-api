@@ -22,6 +22,8 @@ class API {
       "Accept": "application/vnd.github.v3+json",
       "User-Agent": "node-github-api"
     };
+
+    this.Repos = new repos();
   }
 
   getEndpointCategories () {
