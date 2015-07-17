@@ -12,7 +12,7 @@ class API {
           host = "api.github.com";
     
     if (!token) {
-      const e = new Error("NodeGithubApi :: need token!");
+      let e = new Error("NodeGithubApi :: need token!");
       console.error(e);
       throw e;
     }
