@@ -5,24 +5,31 @@ import url from 'url';
 import request from 'superagent';
 import repos from './repos';
 
-export default API;
+class API {
 
-function API({ token }) {
+  constructor (opts = {}) {
+    const { token } = opts,
+          protocol = "https",
+          host = "api.github.com";
+    
+    if (!token) {
+      return console.error(new Error("NodeGithubApi :: need token!"));
+    }
 
-  const protocol = "https",
-        host = "api.github.com",
-        headers = {
-          "Accept": "application/vnd.github.v3+json",
-          "User-Agent": "node-github-api"
-        },
-        baseUrl = url.format({ protocol, host });
+    this.token = token;
+    this.baseUrl = url.format({ protocol, host });
+    this.headers = {
+      "Accept": "application/vnd.github.v3+json",
+      "User-Agent": "node-github-api"
+    };
+  }
 
-  const getEndpointCategories = () => {
+  getEndpointCategories () {
     return new Promise((res, rej) => {
       request
-        .get(baseUrl)
-        .auth(token)
-        .set(headers)
+        .get(this.baseUrl)
+        .auth(this.token)
+        .set(this.headers)
         .end((e, data) => {
           if (e) {
             rej(e);
@@ -32,11 +39,8 @@ function API({ token }) {
           }
         });
     });
-  };
-
-  return {
-    getEndpointCategories,
-    repos
-  };
+  }
 }
+
+export default API;
 

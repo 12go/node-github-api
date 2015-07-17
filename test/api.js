@@ -16,7 +16,7 @@ describe('Get Endpoint Categories', () => {
   let request;
 
   beforeEach(() => {
-    request = api({ token: "f839f7841f7276c6b688e67c4ba562cdd72bbe7b" })
+    request = new api({ token: "f839f7841f7276c6b688e67c4ba562cdd72bbe7b" })
       .getEndpointCategories();
   });
 
