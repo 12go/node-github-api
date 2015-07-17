@@ -3,13 +3,17 @@
 import Promise from 'bluebird';
 import url from 'url';
 import request from 'superagent';
+import repos from './repos';
 
-const API = ({ token }) => {
+export default API;
+
+function API({ token }) {
 
   const protocol = "https",
         host = "api.github.com",
         headers = {
-          "Accept": "application/vnd.github.v3+json"
+          "Accept": "application/vnd.github.v3+json",
+          "User-Agent": "node-github-api"
         },
         baseUrl = url.format({ protocol, host });
 
@@ -28,12 +32,11 @@ const API = ({ token }) => {
           }
         });
     });
-  }
+  };
 
   return {
-    getEndpointCategories
+    getEndpointCategories,
+    repos
   };
-};
-
-export default API;
+}
 
